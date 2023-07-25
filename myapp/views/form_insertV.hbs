@@ -1,0 +1,45 @@
+{{{body}}}
+    <div class="container mt-5">
+        <form id="myForm" class="row g-3" action="/insertV" method="POST" enctype="multipart/form-data">
+            <div class="col-md-4">
+                <label for="inputImagem" class="form-label">Imagem</label>
+                <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
+            </div>
+            <div class="col-md-4">
+                <label for="inputModelo" class="form-label">Modelo</label>
+                <input type="text" class="form-control" id="modelo" name='modelo'>
+            </div>
+            <div class="col-md-4">
+                <label for="inputMarca" class="form-label">Marca</label>
+                <input type="text" class="form-control" id="marca" name="marca">
+            </div>
+            <div class="col-md-4">
+                <label for="inputPlaca" class="form-label">Placa</label>
+                <input type="text" class="form-control" id="placa" name="placa">
+            </div>
+            <div class="col-md-6">
+                <label for="inputChassi" class="form-label">Chassi</label>
+                <input type="text" class="form-control" id="chassi" name="chassi">
+            </div>
+            <div class="col-md-6">
+                <label for="inputDataS25" class="form-label">Data do S25</label>
+                <input type="date" class="form-control" id="datas25" name="datas25">
+            </div>
+            <div class="col-md-6">
+                <label for="selectOcorrencia" class="form-label">Ocorrência</label>
+                <select id="ocorrencia" class="form-select" name="ocorrencia">
+                    <option selected>Escolha...</option>
+                    <option>Furto</option>
+                    <option>Roubo</option>
+                    <option>Acidente</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="inputStatus" class="form-label">Status</label>
+                <input type="text" class="form-control" id="status" name="status">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>

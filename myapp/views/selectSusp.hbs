@@ -1,0 +1,41 @@
+{{{body}}}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome Completo</th>
+      <th>Idade</th>
+      <th>Data de Nascimento</th>
+      <th>Sexo</th>
+      <th>Genitora</th>
+      <th>Genitor</th>
+      <th>Facção</th>
+      <th>Artigos</th>
+      <th>Rua</th>
+      <th>Número</th>
+      <th>Bairro</th>
+      <th>Check me out</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each dados}}
+    <tr>
+      <td>{{nomeCompleto}}</td>
+      <td>{{idade}}</td>
+      <td>{{dataNascimento}}</td>
+      <td>{{sexo}}</td>
+      <td>{{genitora}}</td>
+      <td>{{genitor}}</td>
+      <td>{{faccoes}}</td>
+      <td>{{artigos}}</td>
+      <td>{{rua}}</td>
+      <td>{{numero}}</td>
+      <td>{{bairro}}</td>
+      <td>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck" {{#if checkMeOut}}checked{{/if}}>
+        </div>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

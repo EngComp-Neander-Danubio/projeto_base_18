@@ -1,0 +1,47 @@
+[
+    {
+        "nomeCompleto":"fabin",
+        "faccoes":"GDE"
+    },
+    {
+        "nomeCompleto": "Pedro Santos",
+        "idade": 22,
+        "dataNascimento": "2001-09-05",
+        "sexo": "Masculino",
+        "genitora": "Ana Santos",
+        "genitor": "José Santos",
+        "faccoes": "Faccoa C",
+        "artigos": "Artigo 321, Artigo 654",
+        "rua": "Avenida Principal",
+        "numero": "789",
+        "bairro": "Bairro das Palmeiras"
+      },
+      {
+        "nomeCompleto": "Ana Souza",
+        "idade": 25,
+        "dataNascimento": "1998-11-20",
+        "sexo": "Feminino",
+        "genitora": "Maria Souza",
+        "genitor": "Carlos Souza",
+        "faccoes": "Faccoa B",
+        "artigos": "Artigo 789",
+        "rua": "Rua dos Passarinhos",
+        "numero": "456",
+        "bairro": "Bairro Novo"
+      },
+      {
+        "nomeCompleto": "João da Silva",
+        "idade": 30,
+        "dataNascimento": "1993-05-15",
+        "sexo": "Masculino",
+        "genitora": "Maria da Silva",
+        "genitor": "José da Silva",
+        "faccoes": "Faccoa A",
+        "artigos": "Artigo 123, Artigo 456",
+        "rua": "Rua das Flores",
+        "numero": "123",
+        "bairro": "Centro"
+      }
+                  
+    
+]

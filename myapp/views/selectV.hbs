@@ -1,0 +1,27 @@
+{{{body}}}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Modelo</th>
+      <th>Marca</th>
+      <th>Placa</th>
+      <th>Chassi</th>
+      <th>Data do S25</th>
+      <th>Ocorrência</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each dados}}
+    <tr>
+      <td>{{modelo}}</td>
+      <td>{{marca}}</td>
+      <td>{{placa}}</td>
+      <td>{{chassi}}</td>
+      <td>{{datas25}}</td>
+      <td>{{ocorrencia}}</td>
+      <td>{{status}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
