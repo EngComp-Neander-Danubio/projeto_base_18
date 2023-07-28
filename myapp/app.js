@@ -1,21 +1,33 @@
 var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser'); 
 var logger = require('morgan');
 var multer = require('multer');
-//var bootstrap = require('bootstrap');
+var json = require('json');
+var session = require('express-session');
+var flash = require('flash');
+var bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const secretKey = 'sua_chave_secreta';
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/auth/users');
 var loginRouter = require('./routes/auth/login');
-var insertSuspRouter = require('./routes/insertSusp');
+var logoutRouter  = require('./routes/auth/logout');
+var homeAcessRouter = require('./routes/homeAccess');
+var ConectRouter = require('./routes/conect');
+var insertSuspRouter = require('./routes/insertS');
 var selectSuspRouter = require('./routes/selectSusp');
 var insertVRouter = require('./routes/insertV');
 var selectVRouter = require('./routes/selectV');
 var formVRouter = require('./routes/form_insertV');
+var formSRouter = require('./routes/form_insertS');
+
 
 var app = express();
-var upload = multer()
+//var upload = multer()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,19 +39,50 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// Middleware para verificar a autenticação
+function verifyJWT(req, res, next) {
+  // Verificar se o token está presente nos cookies
+  const token = req.cookies.token;
+  if (!token) {
+    return res.redirect('/login');
+  }
+
+  try {
+    // Verificar e decodificar o token
+    const decodedToken = jwt.verify(token, secretKey);
+
+    // Na prática, você pode usar o ID do usuário para obter mais informações do banco de dados
+    const matricula = decodedToken.matricula;
+
+    // Definir o ID do usuário no objeto de solicitação para uso em outras rotas, se necessário
+    req.matricula = matricula;
+    // Continue para a próxima rota
+    next();
+  } catch (err) {
+    // Se o token não for válido, redirecionar para a página de login
+    res.redirect('/login');
+  }
+}
+
 app.use('/', indexRouter);
+app.use('/homeAccess', verifyJWT, homeAcessRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
-app.use('/insertSusp', insertSuspRouter);
-app.use('/selectSusp', selectSuspRouter);
-app.use('/insertV', insertVRouter);
-app.use('/selectV', selectVRouter);
-app.use('/form_insertV', formVRouter);
+app.use('/logout', verifyJWT, logoutRouter);
+app.use('/insertS', verifyJWT, insertSuspRouter);
+app.use('/selectSusp', verifyJWT, selectSuspRouter);
+app.use('/insertV', verifyJWT, insertVRouter);
+app.use('/selectV', verifyJWT, selectVRouter);
+app.use('/form_insertV', verifyJWT, formVRouter);
+app.use('/form_insertS', verifyJWT, formSRouter);
+app.use('/conect', ConectRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

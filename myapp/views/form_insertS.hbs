@@ -1,0 +1,58 @@
+{{{body}}}
+  <div class="container mt-5">
+    <form class="row g-3" action="/insertS" method="POST" enctype="application/x-www-form-urlencoded">
+      <div class="col-md-4">
+        <label for="inputImagem" class="form-label">Imagem</label>
+        <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
+      </div>
+      <div class="col-md-4">
+        <label for="nomeCompleto" class="form-label">Nome Completo</label>
+        <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto">
+      </div>
+      <div class="col-md-4">
+        <label for="idade" class="form-label">Idade</label>
+        <input type="number" class="form-control" id="idade" name="idade">
+      </div>
+      <div class="col-md-4">
+        <label for="dataNascimento" class="form-label">Data de Nascimento</label>
+        <input type="date" class="form-control" id="dataNascimento" name="dataNascimento">
+      </div>
+      <div class="col-md-4">
+        <label for="sexo" class="form-label">Sexo</label>
+        <select id="sexo" class="form-select" name="sexo">
+          <option value="masculino">Masculino</option>
+          <option value="feminino">Feminino</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="genitora" class="form-label">Nome da Genitora</label>
+        <input type="text" class="form-control" id="genitora" name="genitora">
+      </div>
+      <div class="col-md-4">
+        <label for="genitor" class="form-label">Nome do Genitor</label>
+        <input type="text" class="form-control" id="genitor" name="genitor">
+      </div>
+      <div class="col-md-4">
+        <label for="faccoes" class="form-label">Faccoes</label>
+        <input type="text" class="form-control" id="faccoes" name="faccoes">
+      </div>
+      <div class="col-md-4">
+        <label for="numero" class="form-label">Número</label>
+        <input type="text" class="form-control" id="numero" name="numero">
+      </div>
+      <div class="col-md-4">
+        <label for="rua" class="form-label">Rua</label>
+        <input type="text" class="form-control" id="rua" name="rua">
+      </div>
+      <div class="col-md-4">
+        <label for="bairro" class="form-label">Bairro</label>
+        <input type="text" class="form-control" id="bairro" name="bairro">
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+    </form>
+  </div>
+
+
