@@ -21,20 +21,19 @@ async function getUsers() {
 router.post("/", async function(req, res, next) {
   let numeral = req.body.numeral;
   let matricula = req.body.matricula;
-  console.log(numeral);
-
+  //console.log(numeral);
   const users = await getUsers();
   const user = users.find((user) => user.matricula === matricula && user.numeral === numeral);
   
   if (!user) {
-    return res.status(401).send('Credenciais inválidas');
+    return res.status(401).send('Credenciais inválidas, Tá voando né?');
   }
   // Gerar o token JWT
-  const token = jwt.sign({ id: user.matricula }, secretKey, { expiresIn: '1h' });
+  const token = jwt.sign({ matricula: user.matricula }, secretKey, { expiresIn: '1h' });
   // Armazenar o token nos cookies
   res.cookie('token', token, { httpOnly: true });
   // Redirecionar para a página inicial após o login bem-sucedido
-  res.redirect('/homeAccess');
+  res.redirect('homeAccess');
 });
 
 module.exports = router;

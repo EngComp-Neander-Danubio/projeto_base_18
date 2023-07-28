@@ -7,7 +7,7 @@ router.get('/', async function (req, res, next) {
         if (response.status === 200) { 
             const json = await response.json()
             
-            res.render('selectV', { dados: json }) 
+            res.render('selectV', { dados: json , isAuthenticated: req.cookies.token ? true : false }) 
         } else { 
             throw "Deu erro!!" 
         } 

@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('homeAccess');
+  res.render('homeAccess', { isAuthenticated: req.cookies.token ? true : false });
 });
 
 module.exports = router;

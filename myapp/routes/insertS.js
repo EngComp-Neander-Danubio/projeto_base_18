@@ -15,7 +15,7 @@ router.post('/', async function(req, res, next) {
     // Você pode lidar com a imagem da forma que preferir, talvez salvá-la no servidor, por exemplo:
     //let imagem = req.body.imagem;
 
-    let dadosS = {
+    let dados = {
       'nomeCompleto': nome,
       'idade': idade,
       'dataNascimento': dataNascimento,
@@ -28,20 +28,18 @@ router.post('/', async function(req, res, next) {
       'bairro': bairro,
       //'imagem': imagem
   };
-    dadosS = JSON.stringify(dadosS)
-    console.log(dadosS);
+    dados = JSON.stringify(dados)
+    console.log(dados);
     try {
-    await fetch('http://localhost:4000/insertS/',
-     {
-        method:'POST',
-        body: dadosS,
-        headers : { 'Content-Type': 'application/json' },
+      await fetch("http://localhost:4000/insertSusp/", {
+        method: "POST",
+        body: dados,
+        headers: { "Content-Type": "application/json" },
+      }).then(res.redirect("selectSusp"));
+    } catch (ex) {
+      res.status(500).send({ erro: "deu erro!!" });
+    }
+  });
 
-        })
-        res.redirect('selectSusp')
-      } catch (ex) { 
-        res.status(500).send({ erro: 'deu erro!!' }) 
-    }       
-});
 
 module.exports = router;

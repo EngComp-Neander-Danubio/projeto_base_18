@@ -67,7 +67,7 @@ function verifyJWT(req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/homeAccess', verifyJWT, homeAcessRouter);
-app.use('/users', usersRouter);
+app.use('/users', verifyJWT, usersRouter);
 app.use('/login', loginRouter);
 app.use('/logout', verifyJWT, logoutRouter);
 app.use('/insertS', verifyJWT, insertSuspRouter);
@@ -76,7 +76,7 @@ app.use('/insertV', verifyJWT, insertVRouter);
 app.use('/selectV', verifyJWT, selectVRouter);
 app.use('/form_insertV', verifyJWT, formVRouter);
 app.use('/form_insertS', verifyJWT, formSRouter);
-app.use('/conect', ConectRouter);
+app.use('/conect',ConectRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
