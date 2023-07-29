@@ -22,9 +22,11 @@ var insertSuspRouter = require('./routes/insertS');
 var selectSuspRouter = require('./routes/selectSusp');
 var insertVRouter = require('./routes/insertV');
 var selectVRouter = require('./routes/selectV');
+var updateVRouter = require('./routes/updateV');
+//var updateSRouter = require('./routes/updateS');
 var formVRouter = require('./routes/form_insertV');
 var formSRouter = require('./routes/form_insertS');
-
+var selectVOneRouter = require('./routes/selectVOne');
 
 var app = express();
 //var upload = multer()
@@ -76,6 +78,9 @@ app.use('/insertV', verifyJWT, insertVRouter);
 app.use('/selectV', verifyJWT, selectVRouter);
 app.use('/form_insertV', verifyJWT, formVRouter);
 app.use('/form_insertS', verifyJWT, formSRouter);
+app.use('/updateV', verifyJWT, updateVRouter);
+app.use('/selectVOne', verifyJWT, selectVOneRouter);
+//app.use('/updateS', verifyJWT, updateSRouter);
 app.use('/conect',ConectRouter);
 
 // catch 404 and forward to error handler

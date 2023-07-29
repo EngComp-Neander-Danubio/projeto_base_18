@@ -1,33 +1,33 @@
 {{{body}}}
     <div class="container mt-5">
-        <form  class="row g-3" action="/insertV" method="POST" enctype="application/x-www-form-urlencoded">
+        <form  class="row g-3" action="/updateV/{{dadoV.placa}}" method="post" enctype="application/x-www-form-urlencoded">
             <div class="col-md-4">
                 <label for="inputImagem" class="form-label">Imagem</label>
-                <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
+                <input type="file"  class="form-control" id="imagem" name="imagem" accept="image/*">
             </div>
             <div class="col-md-4">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" id="modelo" name='modelo'>
+                <input type="text" value="{{dadoV.modelo}}" class="form-control" id="modelo" name='modelo'>
             </div>
             <div class="col-md-4">
                 <label for="marca" class="form-label">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca">
+                <input type="text" value="{{dadoV.marca}}" class="form-control" id="marca" name="marca">
             </div>
             <div class="col-md-4">
                 <label for="placa" class="form-label">Placa</label>
-                <input type="text" class="form-control" id="placa" name="placa">
+                <input type="text" value="{{dadoV.placa}}" class="form-control" id="placa" name="placa">
             </div>
             <div class="col-md-6">
                 <label for="chassi" class="form-label">Chassi</label>
-                <input type="text" class="form-control" id="chassi" name="chassi">
+                <input type="text" value="{{dadoV.chassi}}" class="form-control" id="chassi" name="chassi">
             </div>
             <div class="col-md-6">
                 <label for="datas25" class="form-label">Data do S25</label>
-                <input type="date" class="form-control" id="datas25" name="datas25">
+                <input type="date" value="{{dadoV.datas25}}" class="form-control" id="datas25" name="datas25">
             </div>
             <div class="col-md-6">
                 <label for="ocorrencia" class="form-label">Ocorrência</label>
-                <select id="ocorrencia" class="form-select" name="ocorrencia">
+                <select id="ocorrencia" value="{{dadoV.ocorrencia}}" class="form-select" name="ocorrencia">
                     <option selected>Escolha...</option>
                     <option>Furto</option>
                     <option>Roubo</option>
@@ -37,10 +37,10 @@
             </div>
             <div class="col-md-6">
                 <label for="local" class="form-label">Local do s13</label>
-                <input type="text" class="form-control" id="local" name="local">
+                <input type="text" value="{{dadoV.local}}" class="form-control" id="local" name="local">
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary">Alterar</button>
             </div>
         </form>
     </div>

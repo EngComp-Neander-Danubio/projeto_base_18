@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var insertVRouter = require('./routes/insertV');
 var insertSRouter = require('./routes/insertS');
 var selectVRouter = require('./routes/selectV');
+var updateVRouter = require('./routes/updateV');
 var selectSuspRouter = require('./routes/selectSusp');
 var selectURouter = require('./routes/selectU');
 var app = express();
@@ -30,6 +31,8 @@ app.use('/insertS', insertSRouter);
 app.use('/selectV', selectVRouter);
 app.use('/selectSusp', selectSuspRouter);
 app.use('/selectU', selectURouter);
+app.use('/updateV/', updateVRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

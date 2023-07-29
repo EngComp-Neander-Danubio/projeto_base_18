@@ -12,6 +12,8 @@ router.post('/', async function(req, res, next) {
     let numero = req.body.numero;
     let rua = req.body.rua;
     let bairro = req.body.bairro;
+    let local = req.body.local;
+    let tatoo = req.body.tatoo;
     // Você pode lidar com a imagem da forma que preferir, talvez salvá-la no servidor, por exemplo:
     //let imagem = req.body.imagem;
 
@@ -26,12 +28,14 @@ router.post('/', async function(req, res, next) {
       'numero': numero,
       'rua': rua,
       'bairro': bairro,
+      'locals13': local,
+      'tatoo': tatoo
       //'imagem': imagem
   };
     dados = JSON.stringify(dados)
     console.log(dados);
     try {
-      await fetch("http://localhost:4000/insertSusp/", {
+      await fetch("http://localhost:4000/insertS/", {
         method: "POST",
         body: dados,
         headers: { "Content-Type": "application/json" },
