@@ -16,8 +16,6 @@ var selectURouter = require('./routes/selectU');
 var selectSRouter = require('./routes/selectS');
 var updateSRouter = require('./routes/updateS');
 var selectImageVRouter = require('./routes/selectImageV');
-//const formidableMiddleware = require('./routes/formidableMiddleware');
-
 
 var app = express();
 

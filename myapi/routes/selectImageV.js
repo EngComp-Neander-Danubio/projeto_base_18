@@ -1,14 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
 router.get('/:placa', async function(req, res, next) {
   const placa = req.params.placa;
+  //const modelo = req.params.modelo;
 
-  // Construindo o caminho para a pasta das imagens com base na placa
-  const pastaImagens = path.join(path.resolve(__dirname, `../public/uploads/veiculos/`), placa);
-
+  // Construindo o caminho para a pasta das imagens com base na placa e modelo
+  //const pastaImagens = path.join(__dirname, '..', 'public', 'images', 'uploads', 'veiculos', placa);
+  var pastaImagens = path.join(path.resolve(__dirname, `../public/uploads/veiculos/`), placa +'/');
+  console.log(pastaImagens)
   try {
     // Verificando se a pasta de imagens existe
     if (!fs.existsSync(pastaImagens)) {
@@ -23,11 +25,14 @@ router.get('/:placa', async function(req, res, next) {
         return res.sendStatus(500); // Retornar status 500 (Internal Server Error) em caso de erro
       }
 
-      const imagens = files.map((file) => {
-        return path.join(pastaImagens, file);
-      });
-
-      res.json(imagens);
+      const imagensBase64 = await Promise.all(files.map(async (file) => {
+        const filepath = path.join(pastaImagens, file);
+        const bytes = await fs.promises.readFile(filepath);
+        return bytes.toString('base64');
+      }));
+      console.log('até aqui conseguiu')
+      res.json(imagensBase64);
+      
     });
   } catch (ex) {
     console.error('Erro ao processar as imagens:', ex);

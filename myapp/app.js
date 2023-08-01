@@ -85,7 +85,7 @@ app.use('/updateV', verifyJWT, updateVRouter);
 app.use('/updateS', verifyJWT, updateSRouter);
 app.use('/selectVOne', verifyJWT, selectVOneRouter);
 app.use('/selectSOne', verifyJWT, selectSOneRouter);
-app.use('/imageVRoute', verifyJWT, imageVRouter);
+app.use('/selectImageV', verifyJWT, imageVRouter);
 app.use('/conect',ConectRouter);
 
 // catch 404 and forward to error handler

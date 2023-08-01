@@ -1,26 +1,52 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+//const fetch = require('node-fetch');
+const path = require('path');
+const fs = require('fs');
+
+async function getFileAsByte2(filepaths) {
+  try {
+    const bytesArray = await Promise.all(
+      filepaths.map(async (filepath) => {
+        const bytes = await fs.promises.readFile(filepath);
+        return bytes;
+      })
+    );
+
+    return bytesArray;
+  } catch (err) {
+    console.error('Erro ao ler os arquivos:', err);
+    throw err;
+  }
+}
 
 router.get('/:placa', async function (req, res, next) {
   const placa = req.params.placa;
-  placa = toString(placa);
-  console.log(placa);
-  //const modelo = req.params.modelo;
-  console.log("chegou aqui")
-  try {
-    // Chamar a API para obter as imagens correspondentes com base na 'placa' e no 'modelo'
-    const response = await fetch("http://localhost:4000/selectImageV/${placa}");
-    if (response.status === 200) {
-      const imagens = await response.json();
 
-      // Renderizar a view com as imagens recebidas
-      res.render('imagesV', { imagens: imagens }); // 'sua_view' é o nome da view que exibirá as imagens
+  // Construindo a URL da API para obter os caminhos das imagens com base na 'placa'
+  const apiUrl = `http://localhost:4000/selectImageV/${placa}`;
+
+  try {
+    // Fazendo a requisição à API usando o fetch
+    const response = await fetch(apiUrl);
+
+    if (response.status === 200) {
+      const filepaths = await response.json();
+
+      // Obtendo os bytes das imagen
+      //const bytesArray = await getFileAsByte2(filepaths);
+
+      // Convertendo os bytes para base64
+      //const imagensBase64 = bytesArray.map((bytes) => bytes.toString('base64'));
+
+      // Renderizar a view com as imagens em base64
+      res.render('imagesV', { imagens: filepaths, isAuthenticated: req.cookies.token ? true : false }); // 'sua_view' é o nome da view que exibirá as imagens
     } else {
       throw "Deu erro na chamada à API!!";
     }
   } catch (ex) {
-    throw ex;
+    console.error('Erro ao processar as imagens:', ex);
+    res.sendStatus(500); // Retornar status 500 (Internal Server Error) em caso de erro
   }
 });
-
-module.exports = router;
+module.exports = router; 
