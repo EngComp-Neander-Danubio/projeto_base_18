@@ -1,25 +1,25 @@
 {{{body}}}
     <div class="container mt-5">
-        <form  class="row g-3" action="/insertV" method="POST" enctype="application/x-www-form-urlencoded">
+        <form  class="row g-3" action="/insertV" method="POST" enctype="multipart/form-data">
             <div class="col-md-4">
-                <label for="inputImagem" class="form-label">Imagem</label>
+                <label for="imagem" class="form-label">Imagem</label>
                 <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
             </div>
             <div class="col-md-4">
                 <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" id="modelo" name='modelo'>
+                <input type="text" class="form-control" id="modelo" name='modelo' value=" ">
             </div>
             <div class="col-md-4">
                 <label for="marca" class="form-label">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca">
+                <input type="text" class="form-control" id="marca" name="marca" value=" ">
             </div>
             <div class="col-md-4">
                 <label for="placa" class="form-label">Placa</label>
-                <input type="text" class="form-control" id="placa" name="placa">
+                <input type="text" class="form-control" id="placa" name="placa" value=" ">
             </div>
             <div class="col-md-6">
                 <label for="chassi" class="form-label">Chassi</label>
-                <input type="text" class="form-control" id="chassi" name="chassi">
+                <input type="text" class="form-control" id="chassi" name="chassi" value=" ">
             </div>
             <div class="col-md-6">
                 <label for="datas25" class="form-label">Data do S25</label>

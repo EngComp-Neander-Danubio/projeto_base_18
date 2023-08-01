@@ -16,11 +16,12 @@ async function getV() {
     }
   }  
 
-router.get('/:placa', async function (req, res, next) { 
+router.get('/:placa/:modelo', async function (req, res, next) { 
     let placa = req.params.placa;
+    let modelo = req.params.modelo;
 
     const veiculos = await getV();
-    const v = veiculos.find((veiculos) => veiculos.placa === placa);
+    const v = veiculos.find((veiculos) => veiculos.placa === placa && veiculos.modelo === modelo);
     try {
         res.render('form_updateV', { dadoV: v , isAuthenticated: req.cookies.token ? true : false });
 

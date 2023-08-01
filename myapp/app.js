@@ -23,10 +23,13 @@ var selectSuspRouter = require('./routes/selectSusp');
 var insertVRouter = require('./routes/insertV');
 var selectVRouter = require('./routes/selectV');
 var updateVRouter = require('./routes/updateV');
-//var updateSRouter = require('./routes/updateS');
+var updateSRouter = require('./routes/updateS');
 var formVRouter = require('./routes/form_insertV');
 var formSRouter = require('./routes/form_insertS');
 var selectVOneRouter = require('./routes/selectVOne');
+var selectSOneRouter = require('./routes/selectSOne');
+var imageVRouter = require('./routes/selectImageV');
+const { DATE } = require('sequelize');
 
 var app = express();
 //var upload = multer()
@@ -79,8 +82,10 @@ app.use('/selectV', verifyJWT, selectVRouter);
 app.use('/form_insertV', verifyJWT, formVRouter);
 app.use('/form_insertS', verifyJWT, formSRouter);
 app.use('/updateV', verifyJWT, updateVRouter);
+app.use('/updateS', verifyJWT, updateSRouter);
 app.use('/selectVOne', verifyJWT, selectVOneRouter);
-//app.use('/updateS', verifyJWT, updateSRouter);
+app.use('/selectSOne', verifyJWT, selectSOneRouter);
+app.use('/imageVRoute', verifyJWT, imageVRouter);
 app.use('/conect',ConectRouter);
 
 // catch 404 and forward to error handler

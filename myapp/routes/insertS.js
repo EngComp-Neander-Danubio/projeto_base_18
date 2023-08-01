@@ -3,6 +3,7 @@ var router = express.Router();
 
 router.post('/', async function(req, res, next) {
     let nome = req.body.nomeCompleto;
+    let apelido = req.body.apelido;
     let idade = req.body.idade;
     let dataNascimento = req.body.dataNascimento;
     let sexo = req.body.sexo;
@@ -21,6 +22,7 @@ router.post('/', async function(req, res, next) {
       'nomeCompleto': nome,
       'idade': idade,
       'dataNascimento': dataNascimento,
+      'apelido': apelido,
       'sexo': sexo,
       'genitora': genitora,
       'genitor': genitor,

@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
  res.cookie('token', '', { expires: new Date(0), httpOnly: true });
 
  // Redirecionar para a página de login após o logout
- res.redirect('/login');
+ res.redirect('/login', { isAuthenticated: req.cookies.token ? true : false });
 });
 
 module.exports = router;

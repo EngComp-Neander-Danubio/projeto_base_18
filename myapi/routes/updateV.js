@@ -3,8 +3,9 @@ var router = express.Router();
 var fs = require('fs');
 const path = require('path');
 
-router.patch('/:placa', (req, res) => {
+router.patch('/:placa/:modelo', (req, res) => {
     const placa = req.params.placa;
+    const modelo = req.params.modelo;
     const novosValores = req.body; // Supondo que os novos valores sejam enviados no corpo da requisição
 
     // Lendo o conteúdo do arquivo veiculos.json
@@ -14,7 +15,7 @@ router.patch('/:placa', (req, res) => {
     let veiculos = JSON.parse(json);
 
     // Localizando o veículo correspondente à placa
-    const veiculoAtualizado = veiculos.find((veiculo) => veiculo.placa === placa);
+    const veiculoAtualizado = veiculos.find((veiculo) => veiculo.placa === placa && veiculo.modelo === modelo);
 
     // Se o veículo não foi encontrado, envie uma resposta de erro
     if (!veiculoAtualizado) {

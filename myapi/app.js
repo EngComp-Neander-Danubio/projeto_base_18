@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const multer = require('multer');
+const formData = require('express-form-data');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var insertVRouter = require('./routes/insertV');
@@ -12,6 +13,12 @@ var selectVRouter = require('./routes/selectV');
 var updateVRouter = require('./routes/updateV');
 var selectSuspRouter = require('./routes/selectSusp');
 var selectURouter = require('./routes/selectU');
+var selectSRouter = require('./routes/selectS');
+var updateSRouter = require('./routes/updateS');
+var selectImageVRouter = require('./routes/selectImageV');
+//const formidableMiddleware = require('./routes/formidableMiddleware');
+
+
 var app = express();
 
 // view engine setup
@@ -30,8 +37,11 @@ app.use('/insertV', insertVRouter);
 app.use('/insertS', insertSRouter);
 app.use('/selectV', selectVRouter);
 app.use('/selectSusp', selectSuspRouter);
+app.use('/selectS', selectSRouter);
 app.use('/selectU', selectURouter);
 app.use('/updateV/', updateVRouter);
+app.use('/updateS/', updateSRouter);
+app.use('/selectImageV', selectImageVRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

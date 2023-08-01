@@ -19,7 +19,8 @@ router.post('/', (req, res) => {
       console.log('Data successfully written to suspeitos.json');
       res.sendStatus(200);
     }
-  });
+  }
+  );
 });
 
 module.exports = router;
