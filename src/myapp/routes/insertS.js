@@ -1,7 +1,27 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const path = require('path');
+const multer = require('multer');
+const fs = require("fs");
 
-router.post('/', async function(req, res, next) {
+async function getFileAsByte(filepath) {
+  const byte = Buffer.from(new Uint8Array( await fs.readFileSync(filepath)), 'base64');
+  fs.unlinkSync(filepath);
+  return byte;
+};
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    //console.log(path.join(path.resolve(__dirname, "../public/uploads/")))
+    cb(null, path.join(path.resolve(__dirname, "../public/uploads/")));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({storage});
+router.post('/', upload.single("imagem"), async function(req, res, next) {
     let nome = req.body.nomeCompleto;
     let apelido = req.body.apelido;
     let idade = req.body.idade;
@@ -15,8 +35,14 @@ router.post('/', async function(req, res, next) {
     let bairro = req.body.bairro;
     let local = req.body.local;
     let tatoo = req.body.tatoo;
-    // Você pode lidar com a imagem da forma que preferir, talvez salvá-la no servidor, por exemplo:
-    //let imagem = req.body.imagem;
+    let imagem = req.file;
+
+    if (imagem) {
+      // Se uma imagem foi fornecida, processa-a e converte para base64.
+      let fileImage = await getFileAsByte(req.file.path);
+      image = fileImage.toString('base64');
+      //fs.unlinkSync(req.file.path); // Exclui o arquivo temporário depois de convertê-lo.
+    }
 
     let dados = {
       'nomeCompleto': nome,
@@ -31,11 +57,11 @@ router.post('/', async function(req, res, next) {
       'rua': rua,
       'bairro': bairro,
       'locals13': local,
-      'tatoo': tatoo
-      //'imagem': imagem
+      'tatoo': tatoo,
+      'imagem': imagem
   };
     dados = JSON.stringify(dados)
-    console.log(dados);
+    //console.log(dados);
     try {
       await fetch("http://localhost:4000/insertS/", {
         method: "POST",
@@ -46,6 +72,5 @@ router.post('/', async function(req, res, next) {
       res.status(500).send({ erro: "deu erro!!" });
     }
   });
-
 
 module.exports = router;

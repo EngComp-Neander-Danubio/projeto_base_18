@@ -1,6 +1,6 @@
 {{{body}}}
   <div class="container mt-5">
-    <form class="row g-3" action="/insertS" method="POST" enctype="application/x-www-form-urlencoded">
+    <form class="row g-3" action="/insertS" method="POST" enctype="multipart/form-data">
       <div class="col-md-4">
         <label for="inputImagem" class="form-label">Imagem</label>
         <input type="file" class="form-control" id="imagem" name="imagem" accept="image/*">
@@ -15,11 +15,11 @@
       </div>
       <div class="col-md-4">
         <label for="idade" class="form-label">Idade</label>
-        <input type="number" class="form-control" id="idade" name="idade">
+        <input type="number" class="form-control" id="idade" name="idade" value=" ">
       </div>
       <div class="col-md-4">
         <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-        <input type="date" class="form-control" id="dataNascimento" name="dataNascimento">
+        <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" value=" ">
       </div>
       <div class="col-md-4">
         <label for="sexo" class="form-label">Sexo</label>
