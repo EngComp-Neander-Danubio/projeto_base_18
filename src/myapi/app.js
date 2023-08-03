@@ -16,7 +16,7 @@ var selectURouter = require('./routes/selectU');
 var selectSRouter = require('./routes/selectS');
 var updateSRouter = require('./routes/updateS');
 var selectImageVRouter = require('./routes/selectImageV');
-
+var selectImageSRouter = require('./routes/selectImageS');
 var app = express();
 
 // view engine setup
@@ -40,7 +40,7 @@ app.use('/selectU', selectURouter);
 app.use('/updateV/', updateVRouter);
 app.use('/updateS/', updateSRouter);
 app.use('/selectImageV', selectImageVRouter);
-
+app.use('/selectImageS', selectImageSRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

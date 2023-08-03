@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+//const fetch = require('node-fetch');
 const path = require('path');
 const fs = require('fs');
 
@@ -19,11 +20,12 @@ async function getFileAsByte2(filepaths) {
   }
 }
 
-router.get('/:placa', async function (req, res, next) {
-  const placa = req.params.placa;
+router.get('/:nome/:apelido', async function (req, res, next) {
+  const nome = req.params.nome;
+  const apelido = req.params.apelido;
 
   // Construindo a URL da API para obter os caminhos das imagens com base na 'placa'
-  const apiUrl = `http://localhost:4000/selectImageV/${placa}`;
+  const apiUrl = `http://localhost:4000/selectImageV/${nome}/${apelido}`;
 
   try {
     // Fazendo a requisição à API usando o fetch
@@ -39,7 +41,7 @@ router.get('/:placa', async function (req, res, next) {
       //const imagensBase64 = bytesArray.map((bytes) => bytes.toString('base64'));
 
       // Renderizar a view com as imagens em base64
-      res.render('imagesV', { imagensV: filepaths, isAuthenticated: req.cookies.token ? true : false }); // 'sua_view' é o nome da view que exibirá as imagens
+      res.render('imagesS', { imagensS: filepaths, isAuthenticated: req.cookies.token ? true : false }); // 'sua_view' é o nome da view que exibirá as imagens
     } else {
       throw "Deu erro na chamada à API!!";
     }

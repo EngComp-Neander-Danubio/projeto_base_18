@@ -9,6 +9,7 @@ router.get('/', async function (req, res, next) {
             const json = await response.json()
             
             res.render('selectSusp', { dadosS: json , isAuthenticated: req.cookies.token ? true : false }) 
+            return
         } else { 
             throw "Deu erro!!" 
         } 

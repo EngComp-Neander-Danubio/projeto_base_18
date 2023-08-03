@@ -29,70 +29,36 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-
 router.post('/', upload.single('image'), async(req, res) => {
   var dados = req.body;
-  var name = req.dados.name;
-  var nick = req.dados.nick;
-
+  var nome = dados.nomeCompleto;
+  var apelido = dados.apelido;
+  var v1 = ""; 
+    if(apelido === " " && nome !== " "){
+      v1 = nome; 
+    }
+    if (nome === " " && apelido !== " "){
+      v1 = apelido;
+    }
+    if (nome !== " " && apelido !== " "){
+      v1 = nome + "_" + apelido;
+    }
   //there are placa and image
   //make dir to placa e save image
-  if (name !== " " && nick && dados.image){
+  if (v1 !== " " && dados.image){
     //a instrução abaixo está correta
     //cria um path
-    var nomePasta = path.join(path.resolve(__dirname, `../public/uploads/suspeitos/`), name+"_"+ nick);
-
-    if (fs.existsSync(nomePasta) ) {
-      await saveFileFromByte(path.join(nomePasta + '/' + dados.imagem.originalname), dados.image);
-      console.log('Imagem decodificada e salva com sucesso');
-    }else{
-      fs.mkdirSync(nomePasta);
-      await saveFileFromByte(path.join(nomePasta + '/' + dados.imagem.originalname), dados.image);
-      console.log('Imagem decodificada e salva com sucesso');
-    }
-      // Removendo o campo 'image' dos dados antes de salvar em "suspeitos.json"
-      delete dados.image;
-      console.log(JSON.stringify(dados));
-  
-      // Lendo o arquivo "suspeitos.json" e tratando como um JSON válido ou um array vazio
-      let suspeitos;
-      try {
-        suspeitos = JSON.parse(fs.readFileSync(path.join(path.resolve(__dirname, "../public"), 'suspeitos.json'))) || [];
-      } catch (error) {
-        suspeitos = [];
-      }
-    
-      // Adicionando os novos dados ao array
-      suspeitos.push(dados);
-    
-      // Escrevendo os dados no arquivo "suspeitos.json"
-      fs.writeFile(path.join(path.resolve(__dirname, "../public"), 'suspeitos.json'), JSON.stringify(suspeitos), (err) => {
-        if (err) {
-          console.error(err);
-          console.log(dados);
-          res.sendStatus(500);
-        } else {
-          console.log('Data successfully written to suspeitos.json');
-          res.sendStatus(200);
-        }
-      });
-    
-    
-  }
-  
-  if (name === " "|| nick === " " && dados.originalname && dados.image){
-    var nomePasta = path.join(path.resolve(__dirname, `../public/uploads/suspeitos/`), dados.imagem.filename);
+    var nomePasta = path.join(path.resolve(__dirname, `../public/uploads/suspeitos/`), v1);
 
     if (fs.existsSync(nomePasta) ) {
       await saveFileFromByte(path.join(nomePasta + '/' + dados.imagem.originalname), dados.image);
       console.log('Imagem decodificada e salva com sucesso');
       
-    }
-    else{
+    }else{
       fs.mkdirSync(nomePasta);
       await saveFileFromByte(path.join(nomePasta + '/' + dados.imagem.originalname), dados.image);
       console.log('Imagem decodificada e salva com sucesso');
-    
+      
     }
       // Removendo o campo 'image' dos dados antes de salvar em "suspeitos.json"
       delete dados.image;
@@ -113,48 +79,14 @@ router.post('/', upload.single('image'), async(req, res) => {
       fs.writeFile(path.join(path.resolve(__dirname, "../public"), 'suspeitos.json'), JSON.stringify(suspeitos), (err) => {
         if (err) {
           console.error(err);
-          console.log(dados);
           res.sendStatus(500);
         } else {
           console.log('Data successfully written to suspeitos.json');
           res.sendStatus(200);
         }
       });
-    }
-    
-  
-  // Removendo o campo 'image' dos dados antes de salvar em "suspeitos.json"
-  delete dados.image;
-
-  //No placa and no image
-  //save files in json format
-  if (name === " " || nick === " "){
-    console.log(JSON.stringify(dados));
-
-    // Lendo o arquivo "suspeitos.json" e tratando como um JSON válido ou um array vazio
-    let suspeitos;
-    try {
-      suspeitos = JSON.parse(fs.readFileSync(path.join(path.resolve(__dirname, "../public"), 'suspeitos.json'))) || [];
-    } catch (error) {
-      suspeitos = [];
-    }
-  
-    // Adicionando os novos dados ao array
-    suspeitos.push(dados);
-  
-    // Escrevendo os dados no arquivo "suspeitos.json"
-    fs.writeFile(path.join(path.resolve(__dirname, "../public"), 'suspeitos.json'), JSON.stringify(suspeitos), (err) => {
-      if (err) {
-        console.error(err);
-        console.log(dados);
-        res.sendStatus(500);
-      } else {
-        console.log('Data successfully written to suspeitos.json');
-        res.sendStatus(200);
-      }
-    });
+      
   }
-  
 });
 
 module.exports = router;

@@ -1,8 +1,8 @@
-const express = require('express');
+var express = require('express');
 const router = express.Router();
-const path = require('path');
-const multer = require('multer');
-const fs = require("fs");
+var path = require('path');
+var multer = require('multer');
+var fs = require("fs");
 
 async function getFileAsByte(filepath) {
   const byte = Buffer.from(new Uint8Array( await fs.readFileSync(filepath)), 'base64');
@@ -21,6 +21,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage});
+
 router.post('/', upload.single("imagem"), async function(req, res, next) {
     let nome = req.body.nomeCompleto;
     let apelido = req.body.apelido;
@@ -36,7 +37,8 @@ router.post('/', upload.single("imagem"), async function(req, res, next) {
     let local = req.body.local;
     let tatoo = req.body.tatoo;
     let imagem = req.file;
-
+    let image; 
+    
     if (imagem) {
       // Se uma imagem foi fornecida, processa-a e converte para base64.
       let fileImage = await getFileAsByte(req.file.path);
@@ -58,7 +60,8 @@ router.post('/', upload.single("imagem"), async function(req, res, next) {
       'bairro': bairro,
       'locals13': local,
       'tatoo': tatoo,
-      'imagem': imagem
+      'imagem': imagem,
+      'image': image
   };
     dados = JSON.stringify(dados)
     //console.log(dados);
@@ -67,9 +70,11 @@ router.post('/', upload.single("imagem"), async function(req, res, next) {
         method: "POST",
         body: dados,
         headers: { "Content-Type": "application/json" },
-      }).then(res.redirect("selectSusp"));
+      });
+      res.redirect("selectSusp");
     } catch (ex) {
-      res.status(500).send({ erro: "deu erro!!" });
+        res.status(500).send({ erro: "deu erro!!" });
+
     }
   });
 
