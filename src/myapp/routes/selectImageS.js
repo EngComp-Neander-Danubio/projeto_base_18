@@ -25,7 +25,7 @@ router.get('/:nome/:apelido', async function (req, res, next) {
   const apelido = req.params.apelido;
 
   // Construindo a URL da API para obter os caminhos das imagens com base na 'placa'
-  const apiUrl = `http://localhost:4000/selectImageV/${nome}/${apelido}`;
+  const apiUrl = `http://localhost:4000/selectImageS/${nome}/${apelido}`;
 
   try {
     // Fazendo a requisição à API usando o fetch

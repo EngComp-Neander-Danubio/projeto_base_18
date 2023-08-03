@@ -6,20 +6,21 @@ const path = require('path');
 router.get('/:nome/:apelido', async function(req, res, next) {
   const nome = req.params.nome;
   const apelido = req.params.apelido;
+  var v1 = ""; 
+    if(apelido === " " && nome !== " "){
+      v1 = nome; 
+    };
+    if (nome === " " && apelido !== " "){
+      v1 = apelido;
+    };
+    if (nome !== " " && apelido !== " "){
+      v1 = nome + "_" + apelido;
+    };
 
-    if (nome === " " && apelido !== ""){
-        var pastaImagens = path.join(path.resolve(__dirname, `../public/uploads/suspeitos/`), apelido +'/');
+    if (v1 !== " "){
+        var pastaImagens = path.join(path.resolve(__dirname, `../public/uploads/suspeitos/`), v1 +'/');
         console.log(pastaImagens)
-    }
-    if(nome !== " " && apelido === " "){
-        var pastaImagens = path.join(path.resolve(__dirname, `../public/uploads/suspeitos/`), nome +'/');
-        console.log(pastaImagens)
-    }
-    if(nome !== " " && apelido !== " "){
-        var pastaImagens = path.join(path.resolve(__dirname, `../public/uploads/suspeitos/`), nome + "_" + apelido +'/');
-    console.log(pastaImagens)
-    }
-
+    };    
   try {
     // Verificando se a pasta de imagens existe
     if (!fs.existsSync(pastaImagens)) {

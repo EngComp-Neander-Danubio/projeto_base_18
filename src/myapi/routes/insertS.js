@@ -87,6 +87,37 @@ router.post('/', upload.single('image'), async(req, res) => {
       });
       
   }
+  // Removendo o campo 'image' dos dados antes de salvar em "veiculos.json"
+  delete dados.image;
+
+  //No placa and no image
+  //save files in json format
+  if (!dados.image){
+    console.log(JSON.stringify(dados));
+
+    // Lendo o arquivo "veiculos.json" e tratando como um JSON válido ou um array vazio
+    let veiculos;
+    try {
+      veiculos = JSON.parse(fs.readFileSync(path.join(path.resolve(__dirname, "../public"), 'suspeitos.json'))) || [];
+    } catch (error) {
+      veiculos = [];
+    }
+  
+    // Adicionando os novos dados ao array
+    veiculos.push(dados);
+  
+    // Escrevendo os dados no arquivo "veiculos.json"
+    fs.writeFile(path.join(path.resolve(__dirname, "../public"), 'suspeitos.json'), JSON.stringify(veiculos), (err) => {
+      if (err) {
+        console.error(err);
+        console.log(dados);
+        res.sendStatus(500);
+      } else {
+        console.log('Data successfully written to suspeitos.json');
+        res.sendStatus(200);
+      }
+    });
+  }
 });
 
 module.exports = router;
