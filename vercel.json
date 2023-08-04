@@ -1,24 +1,27 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/api/$1"
-      },
-      {
-        "src": "/app/(.*)",
-        "dest": "/"
-      }
-    ],
-    "env": {
-      "NODE_ENV": "production",
-      "CUSTOM_VAR": "value"
+  "version": 2,
+  "builds": [
+    {
+      "src": "myapp/app.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "myapi/bin/www",
+      "use": "@vercel/node"
     }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "myapi/bin/www"
+    },
+    {
+      "src": "/app/(.*)",
+      "dest": "myapp/app.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "CUSTOM_VAR": "value"
   }
-  
+}
