@@ -5,8 +5,7 @@
   "main": "myapp/app.js",
   "scripts": {
     "start": "node .",
-    "dev": "nodemon myapp/app.js",
-    "dev": "nodemon myapi/app.js",
+    "dev": "nodemon myapp/app.js && nodemon myapi/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,13 +13,11 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.1.0",
+    "@vercel/node": "^2.15.8",
+    "express": "^4.18.2",
     "fastify": "^4.21.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
-  },
-  "dependencies": {
-    "@vercel/node": "^2.15.8",
-    "express": "^4.18.2"
   }
 }
