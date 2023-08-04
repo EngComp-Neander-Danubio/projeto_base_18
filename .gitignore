@@ -1,3 +1,4 @@
 /api/node-modules*/
 /app/node-modules*/
 *.md
+.vercel

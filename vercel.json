@@ -1,21 +1,16 @@
 {
     "name": "projeto_base_18",
     "version":2,
-    "puclic": true,
     "build":{
         "src": "myapp/app.js",
         "src":"myapi/app.js",
         "use": "@vercel/node",
         "routes": {
 
-        "src": "/src/myapi/routes",
-        "dest": "/src/myapi/app.js"
-        },
-        "routes":{ 
-            "src": "/src/myapp/routes",
-            "dest": "myapp/app.js"
+        "src": "/(.*)",
+        "dest": "/src/myapp/app.js"
         }
-
+        
     }
 
 }

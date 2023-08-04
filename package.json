@@ -2,10 +2,11 @@
   "name": "projeto_base_18",
   "version": "1.0.0",
   "description": "Data base of s25 from 18bpm",
-  "main": "myapi/app.js",
+  "main": "myapp/app.js",
   "scripts": {
     "start": "node .",
     "dev": "nodemon myapp/app.js",
+    "dev": "nodemon myapi/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
