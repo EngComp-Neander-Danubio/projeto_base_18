@@ -1,6 +1,6 @@
 const http = require('http');
-const app = require('./app/app');
-const api = require('./api/api');
+const app = require('./myapp/app');
+const api = require('./myapi/api');
 
 const server = http.createServer((req, res) => {
   if (req.url.startsWith('/api')) {
